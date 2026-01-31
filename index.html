@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoGP Fan Club</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://resources.motogp.pulselive.com/photo-resources/2023/11/26/2d9b8971-8b0e-4f18-97c7-013149d6360c/DSC08835.JPG?width=1440&height=810');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-color);
+        }
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">MotoGP FAN CLUB</div>
+            <nav>
+                <ul>
+                    <!-- En index.html solo mostramos opciones públicas -->
+                    <li><a href="login.php">Iniciar Sesión</a></li>
+                    <li><a href="register.php">Registrarse</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Pasión por la Velocidad</h1>
+            <p>Únete a la comunidad oficial de fans de MotoGP. Gestiona tus equipos y pilotos favoritos.</p>
+            <a href="register.php" class="cta-button">Únete Ahora</a>
+        </div>
+    </div>
+
+    <footer style="background: #111; padding: 20px; text-align: center; color: #666;">
+        <p>&copy; 2024 MotoGP Fan Club Project. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
