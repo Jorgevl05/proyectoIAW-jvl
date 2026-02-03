@@ -13,33 +13,39 @@ $error = '';
 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 $msg_type = isset($_GET['type']) ? $_GET['type'] : '';
 
+// Verifica si el formulario fue enviado por método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = mysqli_real_escape_string($conn, trim($_POST['email']));
+    
+    // Limpiar inputs para seguridad (evitar inyección SQL básica)
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
 
+    // Validar que los campos no estén vacíos
     if (empty($email) || empty($password)) {
         $error = "Rellena todos los campos.";
     } else {
+        // Buscar al usuario en la base de datos por su email
         $sql = "SELECT id, nombre, password, rol FROM usuarios WHERE email = '$email'";
         $result = mysqli_query($conn, $sql);
 
         if ($result && mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
+            
+            // Verificar si la contraseña introducida coincide con el hash guardado
             if (password_verify($password, $row['password'])) {
-                // Login correcto set variables de sesión
+                // Login correcto: Guardamos datos en la sesión
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_nombre'] = $row['nombre'];
-                $_SESSION['user_email'] = $email;
-                $_SESSION['user_rol'] = $row['rol']; // 'admin' o 'fan'
-
-                // Redirección según rol o página general
-                header("Location: pilotos.php");
+                $_SESSION['user_rol'] = $row['rol']; // 'admin' o 'user'
+                
+                // Redirigir a la página principal
+                header("Location: pilotos.php"); // Mantener la redirección original a pilotos.php
                 exit();
             } else {
-                $error = "Contraseña incorrecta.";
+                $error = "Contraseña incorrecta";
             }
         } else {
-            $error = "No existe cuenta con ese email.";
+            $error = "Usuario no encontrado";
         }
     }
 }
@@ -78,3 +84,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <?php include 'footer.php'; ?>
+
+
